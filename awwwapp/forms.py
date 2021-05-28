@@ -1,4 +1,4 @@
-from .models import Project,Profile,Vote
+from .models import Project,Profile
 from django.forms import ModelForm
 from django import forms
 
@@ -12,4 +12,3 @@ class ProjectForm(ModelForm):
     model=Project
     exclude=['profile', 'post_date',]
 
-    
