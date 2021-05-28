@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'awwwapp.apps.AwwwappConfig',
     'bootstrap5',
     'cloudinary',
+    'tinymce',
 ]
 
 cloudinary.config(
