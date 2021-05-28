@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'awwwapp.apps.AwwwappConfig',
     'bootstrap5',
+    'cloudinary',
 ]
+
+cloudinary.config(
+    cloud_name="joykirii",
+    api_key="856224545722866",
+    api_secret="zwRThSjWRshRNjfDbfHRCblm4HI",
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
