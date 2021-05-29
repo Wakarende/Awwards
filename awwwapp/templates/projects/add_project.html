@@ -1,10 +1,18 @@
-div class="container"> <div id="wrapper" id="content">
+{%extends 'base.html'%} 
+{% load static %} 
+{% load bootstrap4 %} 
+{% block styles %} 
+{{ block.super}}
+{% endblock %}
+
+{% block content %}
+<div class="container"> 
+<div id="wrapper" id="content">
   <div class="register card mr-5 ml-5 mb-5 mt-5" style="padding: 20px;">
     <div class="form-data">
-      <form action="{%url 'upload_image'%}" method="post" enctype="multipart/form-data"> {% csrf_token %} <div
+      <form action="{%url 'create_project'%}" method="post" enctype="multipart/form-data"> {% csrf_token %} <div
           class=" intro card-header bg-white header text-center">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png"
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png"
             alt="Instagram-logo" class="card-img">
         </div> {% bootstrap_form form%} <button class="form-btn btn-primary" type="submit"
           style="padding: 5px 9px; border-radius: 10%;">Upload</button>
@@ -12,3 +20,4 @@ div class="container"> <div id="wrapper" id="content">
     </div>
   </div>
 </div>
+{% endblock  %}

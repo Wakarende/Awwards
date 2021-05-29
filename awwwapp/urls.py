@@ -8,7 +8,10 @@ urlpatterns=[
   path('',views.home, name = 'home'),
   path('create_profile/',views.create_profile,name = 'create_profile'),
   re_path('profile/(?P<profile_id>\d+)',views.profile,name = 'profile'),
-  
+  path('add_project/',views.create_project,name = 'create_project'),
+
+
+
 
   # path('signup/', SignUpView.as_view(), name='signup'),
   

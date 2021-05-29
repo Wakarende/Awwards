@@ -8,6 +8,7 @@ from .forms import CreateProfileForm,ProjectForm
 from django.http import HttpResponseRedirect, Http404
 # Create your views here.
 
+
 @login_required(login_url="/accounts/login/")
 def create_profile(request):
   title="Create Profile"
@@ -26,11 +27,13 @@ def create_profile(request):
   return render(request, "profile/create_profile.html", {"form": form,"title": title})
 # @login_required(login_url="/accounts/login/")
 
+# Display projects 
 def home(request):
 
   return render(request, 'home.html')
 
 
+# Display Profile 
 def profile(request, profile_id):
   title="Profile"
   try:
@@ -45,6 +48,7 @@ def profile(request, profile_id):
   return render(request, "profile/profile.html", {"profile":profile, "projects":projects, "count":project_count, "title":title})
 
 
+# Add Project 
 def create_project(request):
   title="Add Project"
   if request.method == "POST":
@@ -62,3 +66,10 @@ def create_project(request):
   else:
     form=ProjectForm()
   return render(request, 'projects/add_project.html',{"form": form, "title":title})
+
+# Display project 
+def disp_project(request,project_id):
+  project=Project.objects.get(pk=project_id)
+  title=project.name.title()
+  
+  return render(request, 'projects/project.html' "title": title, "project": project,)
