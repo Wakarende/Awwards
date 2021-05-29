@@ -22,13 +22,13 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('' , include("awwwapp.urls")),
-    # path('accounts/register/', RegistrationView.as_view(success_url='/create_profile'),name='django_registration_register'),
+    path('' , include('awwwapp.urls')),
+    path('accounts/register/', RegistrationView.as_view(success_url='/create_profile'),name='django_registration_register'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/')),
     path('accounts/',include('django.contrib.auth.urls')),
-    path('accounts/',include('awwwapp.urls')),
+    # path('accounts/',include('awwwapp.urls')),
 
     # path('login/', LoginView.as_view(redirect_field_name ='/',success_url = '/'), {"next_page": '/'}),
-    # path('accounts/',include('django_registration.backends.one_step.urls')),
+    path('accounts/',include('django_registration.backends.one_step.urls')),
 ]
 
