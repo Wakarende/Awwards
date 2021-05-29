@@ -10,6 +10,8 @@ urlpatterns=[
   re_path('profile/(?P<profile_id>\d+)',views.profile,name = 'profile'),
   path('create_project/',views.create_project,name = 'create_project'),
   path('disp_project/(?P<project_id>\d+)',views.disp_project,name = 'disp_project'),
+  path('search_project/',views.search_project,name = 'search_project'),
+
 
   # path('signup/', SignUpView.as_view(), name='signup'),
 ]

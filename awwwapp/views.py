@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect, Http404
 # Create your views here.
 
 
+# Create Profile 
 @login_required(login_url="/accounts/login/")
 def create_profile(request):
   title="Create Profile"
@@ -27,7 +28,7 @@ def create_profile(request):
   return render(request, "profile/create_profile.html", {"form": form,"title": title})
 # @login_required(login_url="/accounts/login/")
 
-# Display projects 
+# Display all projects 
 def home(request):
   title="awwwards"
   date=dt.date.today()
@@ -69,7 +70,7 @@ def create_project(request):
     form=ProjectForm()
   return render(request, 'projects/create_project.html',{"form": form, "title":title})
 
-# Display project 
+# Display single project 
 def disp_project(request,project_id):
   project=Project.objects.get(pk=project_id)
   title=project.name.title()
@@ -80,13 +81,15 @@ def disp_project(request,project_id):
 #Search Project 
 def search_project(request):
   if request.method == 'GET':
-    title="Search"
+    name=request.GET.get("name")
     search_results=Project.objects.filter(name__icontains = name).all()
     print(search_results)
 
-    return render(request. 'search_results.html',)
+    return render(request,'search_results.html',{"search_results":search_results})
 
   else:
     message="You haven't searched for any project"
   
   return render(request, 'search_results.html', {"message":message})
+
+

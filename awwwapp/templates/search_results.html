@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{% load static %}
+{% load bootstrap4 %}
+
+
+{% block content %}
+{{ block.super}}
+
+<div class="container">
+  <div class="row">
+    {% if search_results %}
+    <h5>Found {{search_results.count}} project(s)</h5>
+  </div>
+</div>
+{% endblock %}

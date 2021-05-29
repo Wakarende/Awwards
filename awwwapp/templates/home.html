@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{project.name}}</h5>
+          <h5 class="card-title"><a href="{% url 'disp_project' project.id %}">{{project.name}}</a></h5>
           <p class="card-text">{{project.desc}}</p>
         </div>
       </div>
