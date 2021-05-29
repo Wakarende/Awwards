@@ -4,26 +4,31 @@
 
 
 {% block content %}
-{{block.super}}
+{{ block.super}}
 <div class="container">
   <!-- <div class="row"> -->
+    {% if projects %}
     <div class="m-4">
+      {% for project in projects %}
       <div class="card" style="width: 18rem;">
         <div class="card-image">
-          <img class="card-img-top" src="https://via.placeholder.com/150x100" alt="Card image cap">
+          <a href="{% url 'disp_project' project.id %}">
+            <img class="card-img-top" src="{{project.proj_img.url}}" alt="Card image cap">
+          </a>
           <div class="image-overlay">
             <a href="" style="text-decoration: none;"><i class="bi bi-arrow-right-circle text-white"></i></a>
           </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text.</p>
+          <h5 class="card-title">{{project.name}}</h5>
+          <p class="card-text">{{project.desc}}</p>
         </div>
       </div>
     </div>
+    {% endfor %}
+    {%endif%}
   <!-- </div> -->
 </div>
-
 {% endblock %}
 
 

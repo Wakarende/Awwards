@@ -29,8 +29,10 @@ def create_profile(request):
 
 # Display projects 
 def home(request):
-
-  return render(request, 'home.html')
+  title="awwwards"
+  date=dt.date.today()
+  projects =Project.display_all_projects()
+  return render(request, 'home.html', {"date":date, "title":title, "projects":projects})
 
 
 # Display Profile 
@@ -58,14 +60,14 @@ def create_project(request):
       profile = Profile.objects.get(user=current_user)
     except Profile.DoesNotExist:
       raise Http404()
-      if form.is_valid():
-        project = form.save(commit=False)
-        project.profile = profile
-        project.save()
-      return redirect('home')
+    if form.is_valid():
+      project = form.save(commit=False)
+      project.profile = profile
+      project.save()
+    return redirect('home')
   else:
     form=ProjectForm()
-  return render(request, 'projects/add_project.html',{"form": form, "title":title})
+  return render(request, 'projects/create_project.html',{"form": form, "title":title})
 
 # Display project 
 def disp_project(request,project_id):
@@ -73,3 +75,4 @@ def disp_project(request,project_id):
   title=project.name.title()
   
   return render(request, 'projects/project.html', {"title": title, "project": project})
+
