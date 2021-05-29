@@ -5,7 +5,7 @@ from django.urls import reverse
 from .models import Profile,Project
 import datetime as dt 
 from .forms import CreateProfileForm,ProjectForm
-
+from django.http import HttpResponseRedirect, Http404
 # Create your views here.
 
 @login_required(login_url="/accounts/login/")
@@ -43,3 +43,22 @@ def profile(request, profile_id):
   except Profile.DoesNotExist:
     raise Http404()
   return render(request, "profile/profile.html", {"profile":profile, "projects":projects, "count":project_count, "title":title})
+
+
+def create_project(request):
+  title="Add Project"
+  if request.method == "POST":
+    form = ProjectForm(request.POST, request.FILES)
+    current_user=request.user
+    try:
+      profile = Profile.objects.get(user=current_user)
+    except Profile.DoesNotExist:
+      raise Http404()
+      if form.is_valid():
+        project = form.save(commit=False)
+        project.profile = profile
+        project.save()
+      return redirect('home')
+  else:
+    form=ProjectForm()
+  return render(request, 'projects/add_project.html',{"form": form, "title":title})
