@@ -12,11 +12,11 @@
       </span>
       <span class="pull-right">
         <div class="nav-icons">
-          <a href="/" class="mr-2">Home</a>
-          <a href="/profile/{{request.user.id}}" class="mr-2">Profile</a>
-          <a href="" class="mr-2">Login/Register</a>
-          <a href="" class="mr-2">Logout</a>
-          <a href="/create_project" class="mr-2">SubmitWebsite</a>
+          <a href="/" class="mr-2 nav-links">Home</a>
+          <a href="/profile/{{request.user.id}}" class="mr-2 nav-links">Profile</a>
+          <a href="" class="mr-2 nav-links">Login/Register</a>
+          <a href="" class="mr-2 nav-links">Logout</a>
+          <button class="submit-website"><a href="/create_project" class="mr-2 text-white">SubmitWebsite</a></button>
         </div>
       </span>
     </nav>
@@ -34,7 +34,7 @@
           <ul class="modal-text">
             <li><a href="/profile/{{request.user.id}}" class="text-modal">Profile</a></li>
             <hr>
-            <li><a href="/create_project" class="text-modal">Submit Website</a></li>
+            <li><button><a href="/create_project" class="text-modal">Submit Website</a></button></li>
             <hr>
             <li><a href="/logout" class="text-modal">Logout</a></li>
             <hr>

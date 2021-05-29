@@ -41,6 +41,14 @@ body {
 .nav-icons{
     font-size: 12px;
 }
+.submit-website{
+    background-color: #49C5B6;
+    border: none;
+    padding: 10px;
+}
+.nav-links{
+    color: black;
+}
 /* END NAVBAR  */
 
 /* HOMEPAGE  */
