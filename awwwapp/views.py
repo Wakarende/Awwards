@@ -72,4 +72,4 @@ def disp_project(request,project_id):
   project=Project.objects.get(pk=project_id)
   title=project.name.title()
   
-  return render(request, 'projects/project.html' "title": title, "project": project,)
+  return render(request, 'projects/project.html', {"title": title, "project": project})
