@@ -1,27 +1,27 @@
-{%extends 'base.html'%}
-{% load static %}
-{% load bootstrap5 %}
-{% block styles %}
+{%extends 'base.html'%} 
+{% load static %} 
+{% load bootstrap4 %} 
+{% block styles %} 
 {{ block.super}}
-
 {% endblock %}
 
 {% block content %}
-<div class="container">
-<div class="box">
-  <div class="text-center">
-    <div class="title">Create a profile to start using Awwards</div>
-    <hr>
-    <div class="guide">Please provide an image for your profile picture, a short description of yourself and/or what you
-      do (bio), your location, email address and a link to your portfolio.</div>
+{{ block.super}}
+<div class="container"> 
+<div id="wrapper" id="content">
+  <div class="register card mr-5 ml-5 mb-5 mt-5" style="padding: 20px;">
+    <div class="form-data">
+      <form action="{%url 'create_project'%}" method="post" enctype="multipart/form-data"> {% csrf_token %} <div
+          class=" intro card-header bg-white header text-center">
+          <img src=""
+            alt="Instagram-logo" class="card-img">
+        </div> {% bootstrap_form form%} <button class="form-btn btn-primary" type="submit"
+          style="padding: 5px 9px; border-radius: 10%;" value="Create Project">Upload</button>
+      </form>
+    </div>
   </div>
-  <form action="{%url 'create_profile'%}" method="post" enctype="multipart/form-data"> {%csrf_token%}
-    {% bootstrap_form form%} <input type="submit" class="btn btn-dark " value="Create Profile">
-  </form>
 </div>
 </div>
-
-
 <!-- Footer  -->
 <footer class="site-footer">
   <div class="container">
@@ -62,4 +62,4 @@
   </div>
 </footer>
 <!-- End Footer  -->
-{% endblock %}
+{% endblock  %}
