@@ -13,7 +13,7 @@
     <div class="form-data">
       <form action="{%url 'create_project'%}" method="post" enctype="multipart/form-data"> {% csrf_token %} <div
           class=" intro card-header bg-white header text-center">
-          <img src=""
+          <img src="{% static 'img/awww_logo.png' %}"
             alt="Instagram-logo" class="card-img">
         </div> {% bootstrap_form form%} <button class="form-btn btn-primary" type="submit"
           style="padding: 5px 9px; border-radius: 10%;" value="Create Project">Upload</button>
