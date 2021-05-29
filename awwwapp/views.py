@@ -76,3 +76,17 @@ def disp_project(request,project_id):
   
   return render(request, 'projects/project.html', {"title": title, "project": project})
 
+
+#Search Project 
+def search_project(request):
+  if request.method == 'GET':
+    title="Search"
+    search_results=Project.objects.filter(name__icontains = name).all()
+    print(search_results)
+
+    return render(request. 'search_results.html',)
+
+  else:
+    message="You haven't searched for any project"
+  
+  return render(request, 'search_results.html', {"message":message})
