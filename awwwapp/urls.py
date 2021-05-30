@@ -11,6 +11,10 @@ urlpatterns=[
   path('create_project/',views.create_project,name = 'create_project'),
   path('disp_project/<project_id>',views.disp_project,name = 'disp_project'),
   path('search_project/',views.search_project,name = 'search_project'),
+  path('api/projects',views.ProjectList.as_view()),
+  path('api/profiles',views.ProfileList.as_view()),
+
+
 
 
   # path('signup/', SignUpView.as_view(), name='signup'),
