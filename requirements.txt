@@ -5,6 +5,7 @@ cloudinary==1.25.0
 confusable-homoglyphs==3.2.0
 Django==3.2.3
 django-bootstrap4==3.0.1
+django-crispy-forms==1.11.2
 django-registration==3.1.2
 django-tinymce==3.3.0
 importlib-metadata==2.1.1

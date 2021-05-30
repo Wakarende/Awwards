@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'cloudinary',
     'tinymce',
+    'crispy_forms',
 ]
 
 cloudinary.config(

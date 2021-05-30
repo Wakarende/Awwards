@@ -114,6 +114,11 @@ body {
   background-repeat: no-repeat;
   /* background-position: center; */
 }
+.rate-card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* .overlay {
     position:relative ;

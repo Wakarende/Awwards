@@ -71,6 +71,7 @@ def create_project(request):
   return render(request, 'projects/create_project.html',{"form": form, "title":title})
 
 # Display single project 
+@login_required(login_url="/accounts/login/")
 def disp_project(request,project_id):
   project=Project.objects.get(pk=project_id)
   title=project.name.title()
@@ -86,11 +87,11 @@ def disp_project(request,project_id):
     if form.is_valid():
       rate=form.save(commit=False)
       rate.user=request.user
-      rate.post=post
+      rate.project=project
       rate.save()
       project_ratings=Rate.objects.filter(project=project)
 
-      design_ratings=[d.design for d in post_ratings]
+      design_ratings=[d.design for d in project_ratings]
       design_average=sum(design_ratings) / len(design_ratings)
 
       usability_ratings=[us.usability for us in project_ratings]

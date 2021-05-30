@@ -1,5 +1,11 @@
-{%extends 'base.html'%} {% load bootstrap4 %} {% load static %} {% block content %} {{ block.super}} <div
-  class="jumbotron jumbotron-fluid overlay"
+{%extends 'base.html'%} 
+{% load bootstrap4 %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block content %} 
+{{ block.super}}
+
+<div class="jumbotron jumbotron-fluid overlay"
   style="background-image:url('{{project.proj_img.url}}'); background-size:cover; height:300px; background-position: center; background-repeat: no-repeat;">
   <div class="overlay">
     <a href="{{project.link}}" style="text-decoration: none;"><i class="bi bi-arrow-right-circle project-icon"></i></a>
@@ -18,7 +24,75 @@
         href="{% url 'profile' project.profile.user.id %}">{{project.profile.user.username}}</a></span> from
     {{project.profile.location}}</div>
   <div class="description mt-5">{{project.desc}}</div>
-  <div class="d-flex">
+
+  <!-- Rating Section  -->
+  <div class="container">
+    <div class="row">
+      <div class="rate-card col-md-12" style="display: flex; justify-content: center;">
+        <div class="card" style="width: 655px;">
+          <div class="card-image">
+            <a href="{% url 'disp_project' project.id %}">
+              <img class="card-img-top" src="{{project.proj_img.url}}" alt="Card image cap">
+            </a>
+            <div class="image-overlay">
+              <a href="{{project.link}}" style="text-decoration: none;"><i
+                  class="bi bi-arrow-right-circle text-white card-icon"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title project-title" style="text-align: left;"><a href="{% url 'disp_project' project.id %}">{{project.name}}</a></h5>
+            <p class="card-text post-date">{{project.post_date}}</p>
+            <img src="{{project.profile.image.url}}" alt="user" style="width: 27px; height: 27px; 
+              " class="rounded-circle image" style="text-align: left !important;"> By<a href="{% url 'profile' project.profile.user.id %}"
+              class="project-username ml-2" style="text-align: left;">{{project.profile.user.username}}</a>
+            <hr>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <h3 class="D-block mx-auto">Ratings Scores</h3>
+                {% for rating in project.ratings.all %}
+                {% if forloop.counter is project.ratings.all.count %} 
+                <a class="btn btn-info btn-sm">
+                  <h5>{{ rating.score }}</h5>
+                  <span class="sc">Average Score</span>
+                </a>
+                <a class="btn btn-outline-success btn-sm">
+                  <h5>{{ rating.design_average }}</h5>
+                  <span class="sc">Design Average</span>
+                </a>
+                <a class="btn btn-outline-primary btn-sm" id="u">
+                  <h5>{{ rating.usability_average }}</h5>
+                  <span class="sc">Usability Average</span>
+                </a>
+                <a class="btn btn-outline-danger btn-sm" id="c">
+                  <h5>{{ rating.content_average }}</h5>
+                  <span class="sc">Content Average</span>
+                </a> 
+                {% endif %} 
+                {% endfor %}
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+             {% if rating_status %}
+            <h5>You have already voted</h5>
+            {% else %}
+            {% if user.is_authenticated %}
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{rating_form|crispy}}
+                <button class="btn btn-sm btn-info">Rate</button>
+            </form>
+            {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    
+  <!-- End Rating Section  -->
+  <!-- <div class="d-flex">
   </div>
   <div class="tabs mt-5">
     <div class="tablinks" onclick="" id="defaultOpen">Votes</div>
@@ -46,7 +120,7 @@
         <div class="guide">Rate the project based on usability, content and design</div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 <!-- Footer  -->
 <footer class="site-footer">
