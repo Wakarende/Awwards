@@ -10,7 +10,7 @@ import statistics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProjectSerializer,ProfileSerializer
-
+from .email import send_welcome_email
 # Create your views here.
 
 
@@ -31,6 +31,15 @@ def create_profile(request):
   else:
     form = CreateProfileForm()
   return render(request, "profile/create_profile.html", {"form": form,"title": title})
+
+# Email 
+@login_required(login_url="/accounts/login/")
+def email(request):
+  current_user = request.user
+  email = current_user.email
+  name = current_user.username
+  send_welcome_email(name, email)
+  return redirect(create_profile)
 
 
 # Display all projects 
