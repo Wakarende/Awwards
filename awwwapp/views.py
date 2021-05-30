@@ -6,6 +6,11 @@ from .models import Profile,Project,Rate
 import datetime as dt 
 from .forms import CreateProfileForm,ProjectForm,RateForm
 from django.http import HttpResponseRedirect, Http404
+import statistics
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProjectSerializer,ProfileSerializer
+
 # Create your views here.
 
 

@@ -20,13 +20,12 @@
           <div class="col-md-6 mt-3">
             <div class="media-body">
               <div class="account-heading">
-                <span class="mr-3 text-secondary username">{{ profile.user.username }}</span>
-                 <span class="mr-3">{{ profile.bio }}</span>
+                <span class="mr-3 username">{{ profile.user.username }}</span>
+                 <span class="mr-3 ">{{ profile.bio }}</span>
               </div>
               <div class="profile-right">
-                {%if average == 0%} 
-                {%else%} 
-                <label><span>{{average | floatformat:0}}</span> average score</label> {% endif %} </div>
+                
+              </div>
                 <div class="post-details mt-3 mb-3">
                   <div class="count"> 
                     {%if count == 1 %} 
