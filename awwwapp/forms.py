@@ -1,4 +1,4 @@
-from .models import Project,Profile
+from .models import Project,Profile,Rate
 from django.forms import ModelForm
 from django import forms
 
@@ -12,3 +12,8 @@ class ProjectForm(ModelForm):
     model=Project
     exclude=['profile', 'post_date',]
 
+class RateForm(ModelForm):
+  class Meta:
+    model=Rate
+    fields=['design','usability','content']
+    

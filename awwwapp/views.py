@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.urls import reverse
-from .models import Profile,Project
+from .models import Profile,Project,Rate
 import datetime as dt 
-from .forms import CreateProfileForm,ProjectForm
+from .forms import CreateProfileForm,ProjectForm,RateForm
 from django.http import HttpResponseRedirect, Http404
 # Create your views here.
 
@@ -74,8 +74,51 @@ def create_project(request):
 def disp_project(request,project_id):
   project=Project.objects.get(pk=project_id)
   title=project.name.title()
+  ratings=Rate.objects.filter(user=request.user, project=project).first()
+  rating_status=None
+  if ratings is None:
+    rating_status=False
+  else:
+    rating_status=True
   
-  return render(request, 'projects/project.html', {"title": title, "project": project})
+  if request.method == 'POST':
+    form=RateForm(request.POST)
+    if form.is_valid():
+      rate=form.save(commit=False)
+      rate.user=request.user
+      rate.post=post
+      rate.save()
+      project_ratings=Rate.objects.filter(project=project)
+
+      design_ratings=[d.design for d in post_ratings]
+      design_average=sum(design_ratings) / len(design_ratings)
+
+      usability_ratings=[us.usability for us in project_ratings]
+      usability_average = sum(usability_ratings) / len(usability_ratings)
+
+      content_ratings = [content.content for content in project_ratings]
+      content_average = sum(content_ratings) / len(content_ratings)
+
+      score = (design_average + usability_average + content_average) / 3
+      print(score)
+      rate.design_average = round(design_average, 2)
+      rate.usability_average = round(usability_average, 2)
+      rate.content_average = round(content_average, 2)
+      rate.score = round(score, 2)
+      rate.save()
+
+      return HttpResponseRedirect(request.path_info)
+    
+  else:
+    form=RateForm()
+  
+  params = {
+        'rating_form': form,
+        'rating_status': rating_status
+
+    }
+
+  return render(request, 'projects/project.html', {"title": title, "project": project ,"rating_form": form, "rating_status": rating_status})
 
 
 #Search Project 
