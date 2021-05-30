@@ -31,9 +31,10 @@ def create_profile(request):
   else:
     form = CreateProfileForm()
   return render(request, "profile/create_profile.html", {"form": form,"title": title})
-# @login_required(login_url="/accounts/login/")
+
 
 # Display all projects 
+@login_required(login_url="/accounts/login/")
 def home(request):
   title="awwwards"
   date=dt.date.today()
@@ -42,6 +43,7 @@ def home(request):
 
 
 # Display Profile 
+@login_required(login_url="/accounts/login/")
 def profile(request, profile_id):
   title="Profile"
   try:
@@ -57,6 +59,7 @@ def profile(request, profile_id):
 
 
 # Add Project 
+@login_required(login_url="/accounts/login/")
 def create_project(request):
   title="Add Project"
   if request.method == "POST":
