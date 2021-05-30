@@ -123,17 +123,22 @@ def disp_project(request,project_id):
 
 
 #Search Project 
+@login_required(login_url="/accounts/login/")
 def search_project(request):
-  if request.method == 'GET':
-    name=request.GET.get("name")
-    search_results=Project.objects.filter(name__icontains = name).all()
-    print(search_results)
+  if "project" in request.GET and request.GET["project"]:
+    search= request.GET.get("project")
+    # title="Search"
+    project=Project.search_project(search)
 
-    return render(request,'search_results.html',{"search_results":search_results})
+    message=f"{project}"
 
+    return render(request, {"message":message, "project":project})
+  
   else:
     message="You haven't searched for any project"
   
   return render(request, 'search_results.html', {"message":message})
+
+
 
 
