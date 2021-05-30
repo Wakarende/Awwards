@@ -1,27 +1,72 @@
-{%extends "registration/base.html"%} 
-{% load bootstrap4 %} 
-{% block content %} 
+{%extends "registration/base.html"%} {% load bootstrap4 %} {% load static %} {% block content %} {{ block.super}} <br>
 <div class="container">
-  <div class="row">
-    <!-- Empty div -->
-    <div class="col-md-4"></div>
-    <div class="col-md-4"> {% if form.errors %} <p> Password or Username is incorrect </p> {% endif %} <div
-        class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="text-center">Sign In</h3>
-        </div>
-        <div class="panel-body">
-          <form action="/accounts/login/" method="post"> {% csrf_token %} {% bootstrap_form form%} <div
-              class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Login">
+  <div class="container">
+    <div class="row">
+      <!-- Empty div -->
+      <div class="col-md-4"></div>
+      <div class="col-md-4" id="wrapper"> {% if form.errors %} <p> Password or Username is incorrect </p> {% endif %}
+        <div>
+          <div class="panel panel-default main-content">
+            <div class="panel-heading header">
+              <h3 class="text-center">Log In</h3>
             </div>
-            <input type="hidden" name="next" value="{{next}}">
-          </form>
+            <div class="panel-body">
+              <form action="/accounts/login/" method="post"> {% csrf_token %} {% bootstrap_form form%} <div
+                  class="form-group">
+                  <input type="submit" class="btn btn-primary btn-sm" value="Login">
+                </div>
+                <input type="hidden" name="next" value="{% url 'home' %}">
+              </form>
+            </div>
+            <div class="sign-up sub-content"> Don't have an account? <div class="s-part">
+                <a href="/accounts/register/" class="ml-2">Sign Up</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- empty div -->
+      <div class="col-md-4"></div>
     </div>
-    <!-- empty div -->
-    <div class="col-md-4"></div>
   </div>
 </div> 
+<!-- Footer  -->
+<footer class="site-footer mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <h6>About</h6>
+        <p class="text-justify">The awards for design, creativity and innovation on the Internet</p>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <h6>Categories</h6>
+        <ul class="footer-links">
+        </ul>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <h6>Quick Links</h6>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/profile/{{request.user.id}}">Profile</a></li>
+          <li><a href="/create_project">Add Project</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by <a href="#">Joy Kirii</a>. </p>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <ul class="social-icons">
+          <li><a class="facebook" href="#"><i class="bi bi-facebook"></i></a></li>
+          <li><a class="twitter" href="#"><i class="bi bi-twitter"></i></a></li>
+          <li><a class="linkedin" href="#"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
 {% endblock %}

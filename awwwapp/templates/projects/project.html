@@ -28,8 +28,8 @@
   <!-- Rating Section  -->
   <div class="container">
     <div class="row">
-      <div class="rate-card col-md-12" style="display: flex; justify-content: center;">
-        <div class="card" style="width: 655px;">
+      <div class="rate-card col-md-12 mt-5" style="display: flex; justify-content: center;">
+        <div class="card mb-5" style="width: 700px;">
           <div class="card-image">
             <a href="{% url 'disp_project' project.id %}">
               <img class="card-img-top" src="{{project.proj_img.url}}" alt="Card image cap">
@@ -46,41 +46,47 @@
               " class="rounded-circle image" style="text-align: left !important;"> By<a href="{% url 'profile' project.profile.user.id %}"
               class="project-username ml-2" style="text-align: left;">{{project.profile.user.username}}</a>
             <hr>
-            <div class="row">
-              <div class="col-md-2"></div>
-              <div class="col-md-8">
-                <h3 class="D-block mx-auto">Ratings Scores</h3>
-                {% for rating in project.ratings.all %}
-                {% if forloop.counter is project.ratings.all.count %} 
-                <a class="btn btn-info btn-sm">
-                  <h5>{{ rating.score }}</h5>
-                  <span class="sc">Average Score</span>
-                </a>
-                <a class="btn btn-outline-success btn-sm">
-                  <h5>{{ rating.design_average }}</h5>
-                  <span class="sc">Design Average</span>
-                </a>
-                <a class="btn btn-outline-primary btn-sm" id="u">
-                  <h5>{{ rating.usability_average }}</h5>
-                  <span class="sc">Usability Average</span>
-                </a>
-                <a class="btn btn-outline-danger btn-sm" id="c">
-                  <h5>{{ rating.content_average }}</h5>
-                  <span class="sc">Content Average</span>
-                </a> 
-                {% endif %} 
-                {% endfor %}
-              </div>
-              <div class="col-md-2"></div>
-            </div>
+            <!-- <div class="row"> -->
+              <!-- <div class="col-md-2"></div> -->
+              <!-- <div class="col-md-8" > -->
+                <h3 class="D-block mx-auto mb-4">Ratings Scores</h3>
+                <div class="d-block">
+                  {% for rating in project.ratings.all %}
+                  {% if forloop.counter is project.ratings.all.count %} 
+                    <a class="btn btn-outline-info btn-sm rounded-circle" style="width: 110px; height: 110px; ">
+                      <h5 class="mt-3">{{ rating.score }} </h5>
+                      <span class="sc mt-3">Average</span>
+                    </a>
+                  <a class="btn btn-outline-success btn-sm rounded-circle"
+                    style=" width: 110px; height: 110px;">
+                    <h5 class="mt-3">{{ rating.design_average }}</h5>
+                    <span class="sc mt-3">Design</span>
+                  </a>
+                  <a class="btn btn-outline-primary btn-sm rounded-circle" id="u"
+                    style=" width: 110px; height: 110px;">
+                    <h5 class="mt-3">{{ rating.usability_average }}</h5>
+                    <span class="sc mt-3">Usability</span>
+                  </a>
+                  <a class="btn btn-outline-danger btn-sm rounded-circle" id="c"
+                    style=" width: 110px; height: 110px;">
+                    <h5 class="mt-3">{{ rating.content_average }}</h5>
+                    <span class="sc mt-3">Content</span>
+                  </a> 
+                  {% endif %} 
+                  {% endfor %}
+                </div>
+               
+              <!-- </div> -->
+              <!-- <div class="col-md-2"></div> -->
+            <!-- </div> -->
              {% if rating_status %}
-            <h5>You have already voted</h5>
+            <h5 class="mt-5">You have already voted</h5>
             {% else %}
             {% if user.is_authenticated %}
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{rating_form|crispy}}
-                <button class="btn btn-sm btn-info">Rate</button>
+                <button class="btn btn-sm btn-info" style="background-color:#49C5B6;">Rate</button>
             </form>
             {% endif %}
             {% endif %}
@@ -89,41 +95,9 @@
       </div>
     </div>
   </div>
-  
-    
-  <!-- End Rating Section  -->
-  <!-- <div class="d-flex">
-  </div>
-  <div class="tabs mt-5">
-    <div class="tablinks" onclick="" id="defaultOpen">Votes</div>
-    <div class="tablinks" onclick="">Rate project</div>
-  </div>
-  <hr>
-  <div id="Votes" class="tabcontent">
-    <div class="vote-titles">
-      <img src="" alt="voter" class="invisible">
-      <p class="voter-name"></p>
-      <p class="vote-title ">Content</p>
-      <p class="vote-title ">Design</p>
-      <p class="vote-title ">Usability</p>
-    </div>
-    <div class="vote-details">
-    </div>
-    <div class="text-center have-already">No votes yet</div>
-  </div>
-  <div id="Rate" class="tabcontent">
-    <div class="text-center have-already">You have already rated this project</div>
-    <div id="rate-form">
-      <div class="text-center">
-        <div class="title">Rate project</div>
-        <hr>
-        <div class="guide">Rate the project based on usability, content and design</div>
-      </div>
-    </div>
-  </div> -->
 </div>
 <!-- Footer  -->
-<footer class="site-footer">
+<footer class="site-footer mt-5">
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-6">
