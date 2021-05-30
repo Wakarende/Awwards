@@ -140,5 +140,15 @@ def search_project(request):
   return render(request, 'search_results.html', {"message":message})
 
 
+# API 
+class ProjectList(APIView):
+  def get(self,request,format = None):
+    projects =  Project.objects.all()
+    serializers = ProjectSerializer(projects, many=True)
+    return Response(serializers.data)  
 
-
+class ProfileList(APIView):
+  def get(self,request,format = None):
+    profiles =  Profile.objects.all()
+    serializers = ProfileSerializer(profiles, many=True)
+    return Response(serializers.data) 
