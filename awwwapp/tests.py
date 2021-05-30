@@ -47,3 +47,6 @@ class TestComment(TestCase):
   def test_get_user_projects(self):
     project=Project.get_user_projects(self.profile)
     self.assertTrue(len(project)>0)
+
+
+
