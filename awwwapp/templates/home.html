@@ -2,32 +2,34 @@
   class="container">
   <div class="row">
     {% if projects %}
-    <div class="m-4">
+    <div class="m-4 col-md-4">
       {% for project in projects %}
-      <div class="card"style="width: 20rem;">
-        <div class="card-image">
-          <a href="{% url 'disp_project' project.id %}">
-            <img class="card-img-top" src="{{project.proj_img.url}}" alt="Card image cap">
-          </a>
-          <div class="image-overlay">
-            <a href="{{project.link}}" style="text-decoration: none;"><i class="bi bi-arrow-right-circle text-white card-icon"></i></a>
+      <div class="home-cards">
+        <div class="card" style="width: 20rem;">
+          <div class="card-image">
+            <a href="{% url 'disp_project' project.id %}">
+              <img class="card-img-top" src="{{project.proj_img.url}}" alt="Card image cap">
+            </a>
+            <div class="image-overlay">
+              <a href="{{project.link}}" style="text-decoration: none;"><i class="bi bi-arrow-right-circle text-white card-icon"></i></a>
+            </div>
           </div>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title"><a href="{% url 'disp_project' project.id %}">{{project.name}}</a></h5>
-          <p class="card-text post-date">{{project.post_date}}</p>
-          <hr>
-          <img src="{{project.profile.image.url}}" alt="user" style="width: 27px; height: 27px; 
-          " class="rounded-circle imag">
-          By<a href="{% url 'profile' project.profile.user.id %}"
-            class="ml-2">{{project.profile.user.username}}</a>
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'disp_project' project.id %}">{{project.name}}</a></h5>
+            <p class="card-text post-date">{{project.post_date}}</p>
+            <hr>
+            <img src="{{project.profile.image.url}}" alt="user" style="width: 27px; height: 27px; 
+            " class="rounded-circle imag">
+            By<a href="{% url 'profile' project.profile.user.id %}"
+              class="ml-2">{{project.profile.user.username}}</a>
+          </div>
         </div>
       </div>
     </div>
   </div> {% endfor %} {%endif%}
 </div>
 <!-- Footer  -->
-<footer class="site-footer">
+<footer class="site-footer mt-5">
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-6">
