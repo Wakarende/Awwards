@@ -82,7 +82,21 @@ body {
   font-weight: normal;
 }
 
+.login-btn{
+  background-color: #49C5B6;
+}
 /* END SIGN IN  */
+
+/* REGISTER  */
+
+.register-btn{
+  background-color: #49C5B6;
+}
+.register-card{
+  padding: 30px;
+}
+/* END REGISTER  */
+
 
 /* FOOTER  */
 .site-footer {
