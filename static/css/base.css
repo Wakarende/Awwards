@@ -142,14 +142,24 @@ body {
 }
 
 /* END OF SINGLE PROJECT  */
-
+/* CREATE PROJECT  */
+.form-btn{
+  background-color:#49C5B6;
+  border: none;
+}
+.form-btn:hover {
+  color: white;
+}
+.create-project-img{
+  width: 300px;
+  height: auto;
+}
+/* END CREATE PROJECT  */
 /* PROFILE  */
-
-/* END OF PROFILE  */
-
-.username{
+.username {
   color: #49C5B6;
 }
+/* END OF PROFILE  */
 
 
 /* FOOTER  */
