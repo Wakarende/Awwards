@@ -19,6 +19,6 @@ class RateForm(ModelForm):
     
 class UpdateProfileForm(ModelForm):
   class Meta:
-    model = Profile
-    fields = ['location',' image','bio','email']
+    model=Profile
+    exclude=['user']
 

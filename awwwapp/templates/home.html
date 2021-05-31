@@ -1,32 +1,42 @@
-{%extends 'base.html'%} {% load static %} {% load bootstrap4 %} {% block content %} {{ block.super}}
-<div class="jumbotron jumbotron-fluid">
-  <h1 class="text-center">Site of the day {{date}}</h1>
-</div>
-{% if highest %} 
-  <a href="{% url 'project' highest.id %}">{{highest.name}}</a>
-  BY <a href="{% url 'profile' highest.profile.user.id %}">{{highest.profile.user.username}}</a> FROM BY
-  {{highest.profile.location}}
-{%endif%}
+{%extends 'base.html'%} 
+{% load static %}
+ {% load bootstrap4 %}
+ {{ block.super}}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+
+{% block content %} 
+  {{ block.super}}
+ <div class="jumbotron jumbotron-fluid home-jumbo home-overlay" style="margin-bottom: 40px;">
+  <h1 class="text-center text-white jumbo-title">Awwwards.</h1>
+  <p class="lead text-white text-center mt-1 jumbo-text" style="font-size: 12px;">The awards that recognize the talent and effort of the best web
+    designers, developers and agencies in the world.</p>
+ </div>
+ <div class="container">
+  <p>Nominees | <span>We need your vote! </span></p>
+ </div>
 <div class="container" style="display: flex; flex-wrap: wrap;">
+
   {% if projects %}
   {% for project in projects %}
   <div class="m-4">
-    <div class="card" style="width: 20rem;">
-      <div class="card-image">
+    <div class="card " style="width: 20rem; height: 22rem;">
+      <div class="card-image img-fluid">
         <a href="{% url 'disp_project' project.id %}">
           <img class="card-img-top" src="{{project.proj_img.url}}" alt="Card image cap">
         </a>
         <div class="image-overlay">
-          <a href="{{project.link}}" style="text-decoration: none;"><i
+          <a href="{{project.link}}" style="text-decoration: none;" class="card-icon-link"><i
               class="bi bi-arrow-right-circle text-white card-icon"></i></a>
         </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'disp_project' project.id %}">{{project.name}}</a></h5>
+      <div class="card-body " style="padding-bottom: 10px;">
+        <h5 class="card-title "><a href="{% url 'disp_project' project.id %}"
+            class="home-card-title">{{project.name}}</a></h5>
         <p class="card-text post-date">{{project.post_date}}</p>
         <hr>
         <img src="{{project.profile.image.url}}" alt="user" style="width: 27px; height: 27px;" class="rounded-circle imag"> 
-        By<a href="{% url 'profile' project.profile.user.id %}" class="ml-2">{{project.profile.user.username}}</a>
+        By<a href="{% url 'profile' project.profile.user.id %}" class="ml-2 home-username">{{project.profile.user.username}}</a>
       </div>
     </div>
   </div>

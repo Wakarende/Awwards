@@ -9,9 +9,10 @@ from django.http import HttpResponseRedirect, Http404
 import statistics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import ProjectSerializer,ProfileSerializer
+from .serializer import ProjectSerializer,ProfileSerializer,UserSerializer
 from rest_framework import viewsets
 from .email import send_welcome_email
+import random
 # Create your views here.
 
 
@@ -68,17 +69,36 @@ def profile(request, profile_id):
   return render(request, "profile/profile.html", {"profile":profile, "projects":projects, "count":project_count, "title":title})
 
 # Update Profile
-def edit_profile(request, username):
-  user = User.objects.get(username=username)
-  if request.method == 'POST':
-    profile_form=UpdateProfileForm(request.POST, request.FILES, instance=current_user.profile)
-    if profile_form.is_valid():
-      profile_form.save()
-      return redirect('profile', user.pk)
-  else:
-    update_profile=UpdateProfileForm(instance=current_user.profile)
+# def edit_profile(request, username):
+#   user =User.objects.get(pk=profile_id)
+#   if request.method == 'POST':
+#     profile_form=UpdateProfileForm(request.POST, request.FILES, instance=current_user.profile)
+#     if profile_form.is_valid():
+#       profile_form.save()
+#       return redirect('profile', user.pk)
+#   else:
+#     update_profile=UpdateProfileForm(instance=current_user.profile)
   
-  return render(request,"profile/updateprofile.html",{"update_profile":update_profile})
+#   return render(request,"profile/updateprofile.html",{"update_profile":update_profile})
+
+def edit_profile(request):
+  current_user = request.user
+  if request.method == "POST":
+    form = UpdateProfileForm(request.POST, request.FILES)
+    if form.is_valid():
+      image = form.cleaned_data['image']
+      bio  = form.cleaned_data['bio']
+      email = form.cleaned_data['email']
+      updated_profile = Profile.objects.get(user= current_user)
+      updated_profile.image= image
+      updated_profile.bio = bio
+      updated_profile.email = email
+      updated_profile.save()
+    return redirect('profile')
+  else:
+    form = UpdateProfileForm()
+  return render(request, 'profile/updateprofile.html', {"form": form})
+
 # Add Project 
 @login_required(login_url="/accounts/login/")
 def create_project(request):
@@ -168,16 +188,3 @@ def search_project(request):
   
     return render(request, 'search_results.html')
 
-
-# API 
-class ProjectList(APIView):
-  def get(self,request,format = None):
-    projects =  Project.objects.all()
-    serializers = ProjectSerializer(projects, many=True)
-    return Response(serializers.data)  
-
-class ProfileList(APIView):
-  def get(self,request,format = None):
-    profiles =  Profile.objects.all()
-    serializers = ProfileSerializer(profiles, many=True)
-    return Response(serializers.data) 

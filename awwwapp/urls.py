@@ -1,7 +1,9 @@
-from django.urls import path,re_path
+from django.urls import path,re_path,include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import routers
+
 
 
 urlpatterns=[
@@ -11,10 +13,8 @@ urlpatterns=[
   path('create_project/',views.create_project,name = 'create_project'),
   path('disp_project/<project_id>',views.disp_project,name = 'disp_project'),
   path('search_project/',views.search_project,name = 'search_project'),
-  path('api/projects',views.ProjectList.as_view()),
-  path('api/profiles',views.ProfileList.as_view()),
   path('email/', views.email, name='email'),
-  
+  re_path('edit_profile/<profile_id>',views.edit_profile,name='edit_profile'),
 
 
 

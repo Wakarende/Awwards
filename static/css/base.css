@@ -55,6 +55,28 @@ body {
 /* END NAVBAR  */
 
 /* HOMEPAGE  */
+/* jumbotron  */
+.home-jumbo{
+  /* height: 300px; */
+  background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("/static/img/rename.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 50vh;
+  background-size: cover;
+}
+
+.overlay{
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+/* End jumbotron  */
 
 /* card-overlay */
 .card-image {
@@ -102,7 +124,19 @@ body {
   flex-wrap: wrap;
   flex-direction: row;
 }
+.home-card-title{
+  color: black;
+}
+.home-card-title:hover {
+  color:#49C5B6;
+}
 
+.home-username{
+  color: black;
+}
+.home-username:hover{
+  color: #49C5B6;
+}
 /* SINGLE PROJECT  */
 .jumbotron-img {
   background-size: cover;
