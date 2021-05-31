@@ -1,25 +1,19 @@
-{%extends 'base.html'%} 
-{% load static %} 
-{% load bootstrap4 %} 
-{% block styles %} 
-{{ block.super}}
-{% endblock %}
-
-{% block content %}
-{{ block.super}}
-<div class="container"> 
-<div id="wrapper" id="content">
-  <div class="register card mr-5 ml-5 mb-5 mt-5" style="padding: 20px;">
-    <div class="form-data">
-      <form action="{%url 'create_project'%}" method="post" enctype="multipart/form-data"> {% csrf_token %} <div
-          class=" intro card-header bg-white header text-center">
-          <img src="{% static 'img/awww_logo.png' %}"
-            alt="Instagram-logo" class="create-project-img">
-        </div> {% bootstrap_form form%} <button class="form-btn btn btn-sm" type="submit" value="Create Project">Upload</button>
-      </form>
+{%extends 'base.html'%} {% load static %} {% load bootstrap4 %} {% block styles %} {{ block.super}} {% endblock %}
+{% block content %} {{ block.super}} <div class="container">
+  <div id="wrapper" id="content">
+    <div class="register card mr-5 ml-5 mb-5 mt-5" style="padding: 20px;">
+      <div class="form-data">
+        <form action="{%url 'create_project'%}" method="post" enctype="multipart/form-data"> {% csrf_token %} <div
+            class=" intro card-header bg-white header text-center">
+            <img src="{% static 'img/awww_logo.png' %}" alt="Instagram-logo" class="create-project-img">
+            <p class="mt-2" style="font-size: 12px;">Submit your website by providing a Name for the website,a screenshot of the website,a short
+              description and a link to the website</p>
+          </div> {% bootstrap_form form%} <button class="form-btn btn btn-sm" type="submit"
+            value="Create Project">Upload</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </div>
 <!-- Footer  -->
 <footer class="site-footer">
@@ -60,5 +54,4 @@
     </div>
   </div>
 </footer>
-<!-- End Footer  -->
-{% endblock  %}
+<!-- End Footer  --> {% endblock  %}
