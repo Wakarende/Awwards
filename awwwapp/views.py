@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from .models import Profile,Project,Rate
 import datetime as dt 
-from .forms import CreateProfileForm,ProjectForm,RateForm
+from .forms import CreateProfileForm,ProjectForm,RateForm,UpdateProfileForm
 from django.http import HttpResponseRedirect, Http404
 import statistics
 from rest_framework.response import Response
@@ -67,7 +67,18 @@ def profile(request, profile_id):
     raise Http404()
   return render(request, "profile/profile.html", {"profile":profile, "projects":projects, "count":project_count, "title":title})
 
-
+# Update Profile
+def edit_profile(request, username):
+  user = User.objects.get(username=username)
+  if request.method == 'POST':
+    profile_form=UpdateProfileForm(request.POST, request.FILES, instance=current_user.profile)
+    if profile_form.is_valid():
+      profile_form.save()
+      return redirect('profile', user.pk)
+  else:
+    update_profile=UpdateProfileForm(instance=current_user.profile)
+  
+  return render(request,"profile/updateprofile.html",{"update_profile":update_profile})
 # Add Project 
 @login_required(login_url="/accounts/login/")
 def create_project(request):

@@ -17,3 +17,8 @@ class RateForm(ModelForm):
     model=Rate
     fields=['design','usability','content']
     
+class UpdateProfileForm(ModelForm):
+  class Meta:
+    model = Profile
+    fields = ['location',' image','bio','email']
+
