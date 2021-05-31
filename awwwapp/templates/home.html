@@ -1,7 +1,12 @@
-{%extends 'base.html'%} {% load static %} {% load bootstrap4 %} {% block content %} {{ block.super}} <div
-  class="jumbotron jumbotron-fluid">
+{%extends 'base.html'%} {% load static %} {% load bootstrap4 %} {% block content %} {{ block.super}}
+<div class="jumbotron jumbotron-fluid">
+  <h1 class="text-center">Site of the day {{date}}</h1>
 </div>
-
+{% if highest %} 
+  <a href="{% url 'project' highest.id %}">{{highest.name}}</a>
+  BY <a href="{% url 'profile' highest.profile.user.id %}">{{highest.profile.user.username}}</a> FROM BY
+  {{highest.profile.location}}
+{%endif%}
 <div class="container" style="display: flex; flex-wrap: wrap;">
   {% if projects %}
   {% for project in projects %}

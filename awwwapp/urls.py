@@ -14,6 +14,7 @@ urlpatterns=[
   path('api/projects',views.ProjectList.as_view()),
   path('api/profiles',views.ProfileList.as_view()),
   path('email/', views.email, name='email'),
+  
 
 
 

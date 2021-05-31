@@ -10,6 +10,7 @@ import statistics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProjectSerializer,ProfileSerializer
+from rest_framework import viewsets
 from .email import send_welcome_email
 # Create your views here.
 
@@ -143,18 +144,18 @@ def disp_project(request,project_id):
 @login_required(login_url="/accounts/login/")
 def search_project(request):
   if "project" in request.GET and request.GET["project"]:
-    search= request.GET.get("project")
+    search_term= request.GET.get("project")
     # title="Search"
-    project=Project.search_project(search)
+    searched_projects =Project.search_project(search_term)
 
-    message=f"{project}"
+    message=f"{search_term}"
 
-    return render(request, {"message":message, "project":project})
+    return render(request,'search_results.html', {"message":message,"searched_projects":searched_projects})
   
   else:
-    message="You haven't searched for any project"
+    
   
-  return render(request, 'search_results.html', {"message":message})
+    return render(request, 'search_results.html')
 
 
 # API 

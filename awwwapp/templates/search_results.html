@@ -1,9 +1,12 @@
 {%extends 'base.html'%} {% load static %} {% load bootstrap4 %} {% block content %} {{ block.super}} <br>
 <div class="container">
   <div class="row">
-    <!-- Search Results  --> {% if projects %} <h5>Found {{count}} project(s) titled <span>{{message}}</span></h5>
-    <!-- {% for project in projects %}
-      <div class="home-cards">
+    <!-- Search Results  --> 
+    {% if searched_projects %} 
+    <h5 class="text-center">Found  project(s) titled {{message}}</h5>
+    {% for project in searched_projects %}
+    
+      <div class="home-cards mt-5">
         <div class="card" style="width: 20rem;">
           <div class="card-image">
             <a href="{% url 'disp_project' project.id %}">
@@ -24,11 +27,11 @@
           </div>
         </div>
       </div>
-    {% endfor %} --> {% else %} 
-    <div class="search-title">
+    {% endfor %} {% else %} <div class="search-title">
       <p>{{message}}</p><br>
     </div>
     <div class="suggestions-title">Go back <a href="/">home</a> to see other projects</div> {% endif %}
   </div>
 </div>
-<!-- End Search Results  --> {% endblock %}
+<!-- End Search Results  --> 
+{% endblock %}
