@@ -75,7 +75,7 @@ class Rate(models.Model):
 
   @classmethod
   def get_ratings(cls, id):
-    ratings = Rating.objects.filter(post_id=id).all()
+    ratings = Rating.objects.filter(project_id=id).all()
     return ratings
 
   def __str__(self):

@@ -57,20 +57,28 @@ class TestProject(TestCase):
     self.assertEqual(len(project),1)
 
 
-class TestRate(TestCase):
+class TestRating(TestCase):
   def setUp(self):
     self.user = User(username="joy", email="joy@gmail.com", password="1234")
     self.profile = Profile(bio="Test profile", user=self.user)
-    self.project = Project(name="test", proj_img="img.png",desc="description", link="link", profile=self.profile  )
-
+    self.project = Project(id=1,name="test", proj_img="img.png",desc="description", link="link", profile=self.profile  )
+    self.rating = Rate(id=1, design=5, usability=7, content=9, user=self.user, project=self.project)
 
     self.user.save()
     self.profile.save()
     self.project.save()
+    self.rating.save()
+
 
   def tearDown(self):
     Profile.objects.all().delete()
     Project.objects.all().delete()
     Rate.objects.all().delete()
 
-  
+  def test_instance(self):
+    self.assertTrue(isinstance(self.rating, Rate))
+
+  def test_save_rating(self):
+    rating=Rate.objects.all()
+    self.assertTrue(len(rating)>0)
+
