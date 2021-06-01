@@ -5,7 +5,6 @@
     {% if searched_projects %} 
     <h5 class="text-center">Found  project(s) titled {{message}}</h5>
     {% for project in searched_projects %}
-    
       <div class="home-cards mt-5">
         <div class="card" style="width: 20rem;">
           <div class="card-image">
@@ -17,13 +16,14 @@
             </div>
           </div>
           <div class="card-body">
-            <h5 class="card-title"><a href="{% url 'disp_project' project.id %}">{{project.name}}</a></h5>
+            <h5 class="card-title"><a href="{% url 'disp_project' project.id %}"
+                class="home-card-title">{{project.name}}</a></h5>
             <p class="card-text post-date">{{project.post_date}}</p>
             <hr>
             <img src="{{project.profile.image.url}}" alt="user" style="width: 27px; height: 27px; 
             " class="rounded-circle imag">
             By<a href="{% url 'profile' project.profile.user.id %}"
-              class="ml-2">{{project.profile.user.username}}</a>
+              class="ml-2 home-username">{{project.profile.user.username}}</a>
           </div>
         </div>
       </div>
@@ -34,4 +34,43 @@
   </div>
 </div>
 <!-- End Search Results  --> 
+<footer class="site-footer mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <h6>About</h6>
+        <p class="text-justify">The awards for design, creativity and innovation on the Internet</p>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <h6>Categories</h6>
+        <ul class="footer-links">
+        </ul>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <h6>Quick Links</h6>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/profile/{{request.user.id}}">Profile</a></li>
+          <li><a href="/create_project">Add Project</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by <a href="#">Joy Kirii</a>. </p>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <ul class="social-icons">
+          <li><a class="facebook" href="#"><i class="bi bi-facebook"></i></a></li>
+          <li><a class="twitter" href="#"><i class="bi bi-twitter"></i></a></li>
+          <li><a class="linkedin" href="#"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- End Footer  -->
 {% endblock %}

@@ -52,6 +52,12 @@ body {
   color: black;
 }
 
+@media screen and (max-width: 800px){
+  .navbar-brand{
+    margin-right: 5rem;
+  }
+}
+
 /* END NAVBAR  */
 
 /* HOMEPAGE  */
@@ -390,4 +396,6 @@ body {
 }
 
 /* END FOOTER  */
+
+
 /* END HOMEPAGE  */
