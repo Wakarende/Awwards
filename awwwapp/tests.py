@@ -20,7 +20,7 @@ class TestProfile(TestCase):
     self.assertTrue(isinstance(self.profile_test, Profile))
 
 
-class TestComment(TestCase):
+class TestProject(TestCase):
   def setUp(self):
     self.user = User(username="joy", email="joy@gmail.com", password="1234")
     self.profile = Profile(bio="Test profile", user=self.user)
@@ -48,5 +48,29 @@ class TestComment(TestCase):
     project=Project.get_user_projects(self.profile)
     self.assertTrue(len(project)>0)
 
+  def test_display_all_projects(self):
+    project=Project.display_all_projects()
+    self.assertTrue(len(project)>0)
+
+  def test_search_project(self):
+    project=Project.search_project('test')
+    self.assertEqual(len(project),1)
 
 
+class TestRate(TestCase):
+  def setUp(self):
+    self.user = User(username="joy", email="joy@gmail.com", password="1234")
+    self.profile = Profile(bio="Test profile", user=self.user)
+    self.project = Project(name="test", proj_img="img.png",desc="description", link="link", profile=self.profile  )
+
+
+    self.user.save()
+    self.profile.save()
+    self.project.save()
+
+  def tearDown(self):
+    Profile.objects.all().delete()
+    Project.objects.all().delete()
+    Rate.objects.all().delete()
+
+  
